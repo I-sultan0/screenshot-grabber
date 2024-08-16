@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  width: 100%;
+  /* height: 100%; */
+  background: rgb(255, 175, 210);
+  background: radial-gradient(
+    circle,
+    rgba(255, 175, 210, 1) 0%,
+    rgba(78, 255, 220, 0.8211659663865546) 50%,
+    rgba(201, 148, 233, 1) 100%
+  );
+}
