@@ -65,9 +65,6 @@ const App = () => {
             <a href={imageUrl} target="_blank" rel="noopener noreferrer">
               [Open Image in new Tab]
             </a>
-            <a href={imageUrl} download="screenshot.png" target="_blank">
-              <button>Download</button>
-            </a>
           </p>
           <button
             onClick={() => {
