@@ -9,74 +9,86 @@ const App = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setCopied(false);
+    // setCopied(false);
     if (!url) {
       return alert("Enter the website link");
     }
     setLoader(true);
-    setImageUrl("");
+    // setImageUrl("");
     try {
       const response = await fetch(
-        `https://shot.screenshotapi.net/screenshot?token=XZ3Q9N0-QH84Z3N-MS9YJ45-K393HWC&url=${url}`
+        `https://shot.screenshotapi.net/screenshot?token=9034712-CEE4DN7-QPFYGMQ-87AVBNV&url=${url}`
       );
       const data = await response.json();
-      // console.log(data);
+      console.log(data);
       setImageUrl(data.screenshot);
-      setLoader(false);
     } catch (error) {
       console.error("Error fetching screenshot:", error);
       alert("Something went Wrong, try again later");
-      setLoader(false);
     }
+    setLoader(false);
+    setUrl("");
   };
 
   return (
-    <div className="container">
-      <h1>Capture Any Website Screenshot in Seconds</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="input">
-          <input
-            type="text"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            placeholder="Enter website URL"
-          />{" "}
-          <span
-            onClick={() => {
-              setUrl("");
-              setImageUrl("");
-            }}
-          >
-            x
-          </span>
-        </div>
-        <button type="submit">Generate </button>
-      </form>
-
-      {loader && (
-        <div className="loader">
-          <h2>Image Loading, Please Wait...</h2>
+    <>
+      {!imageUrl && (
+        <div className="container">
+          <h1>
+            Turn Any URL into a <br /> Stunning Screenshot
+          </h1>
+          <p>
+            Simply enter a URL and get a high-quality screenshot in seconds.
+          </p>
+          <form onSubmit={handleSubmit}>
+            <div className="input">
+              <input
+                type="text"
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+                placeholder="Paste URL"
+              />
+            </div>
+            <button type="submit" disabled={loader}>
+              {loader ? "Loading..." : "📷 Get Screenshot"}{" "}
+            </button>
+          </form>
         </div>
       )}
       {imageUrl && (
         <div className="image">
+          <h1>Your Screenshot is Ready</h1>
+          <p>You can copy the screenshot</p>
+          <div>
+            <button onClick={() => setImageUrl("")}> ↶ Start Over</button>
+            <button
+              className="copy"
+              onClick={() => {
+                navigator.clipboard.writeText(imageUrl);
+                setCopied(true);
+              }}
+            >
+              {" "}
+              {copied ? "📋 Copied" : " 📋 Copy"}
+            </button>
+          </div>
           <img src={imageUrl} alt="Website Thumbnail" />
-          <p>
+          {/* <p>
             <a href={imageUrl} target="_blank" rel="noopener noreferrer">
               [Open Image in new Tab]
             </a>
-          </p>
-          <button
+          </p> */}
+          {/* <button
             onClick={() => {
               navigator.clipboard.writeText(imageUrl);
               setCopied(true);
             }}
           >
             {copied ? "Copied✓" : "Copy"}
-          </button>
+          </button> */}
         </div>
       )}
-    </div>
+    </>
   );
 };
 
