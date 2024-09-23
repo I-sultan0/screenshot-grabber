@@ -17,7 +17,7 @@ const App = () => {
     // setImageUrl("");
     try {
       const response = await fetch(
-        `https://shot.screenshotapi.net/screenshot?token=R0AY1RZ-KRN481B-HS0T34G-23NZR6G&url=${url}`
+        `https://shot.screenshotapi.net/screenshot?token=YTSEZNE-4TAME2H-MF0QEJK-WJ3E72A&url=${url}`
       );
       const data = await response.json();
       console.log(data);
